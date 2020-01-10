@@ -1,0 +1,19 @@
+name: actions/github-script
+on:
+  pull_request:
+jobs:
+  require-core:
+    name: Test require core
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@master
+      - name: Test require core
+        uses: actions/github-script@0.4.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const core = require('@actions/core')
+            console.log(core)
